@@ -19,6 +19,11 @@ namespace RS232CommunicationExample
             serialPort = new SerialPort();
             serialPort.DataReceived += SerialPort_DataReceived;
         }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            buttonClose.Enabled = false;
+            buttonOpen.Enabled = true;
+        }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -31,10 +36,32 @@ namespace RS232CommunicationExample
             if (!serialPort.IsOpen)
             {
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();
-                buttonOpen.Enabled = false;
                 buttonClose.Enabled = true;
-                serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
-                serialPort.Open();
+                try
+                {
+                    serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
+                    serialPort.Open();
+                    buttonOpen.Enabled = false;
+                    buttonClose.Enabled = true;
+                }
+                catch (Exception)
+                {
+                    if (txtBaudRate.Text.GetType() == typeof(string))
+                    {
+                        MessageBox.Show("Lütfen Sayısal Baud Değer giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else { }
+                }
+            }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
+                buttonOpen.Enabled = true;
             }
         }
 
@@ -46,19 +73,7 @@ namespace RS232CommunicationExample
             }
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            if (serialPort.IsOpen)
-            {
-                serialPort.Close();
-            }
-        }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            buttonClose.Enabled = false;
-            buttonOpen.Enabled = true;
-        }
         private void txtBaudRate_Click(object sender, EventArgs e)
         {
             txtBaudRate.Text = string.Empty;

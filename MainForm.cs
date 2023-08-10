@@ -37,6 +37,12 @@ namespace RS232CommunicationExample
             {
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();
                 buttonClose.Enabled = true;
+                if (txtBaudRate.Text == "DESİRED BAUD RATE :" || txtBaudRate.Text == "")
+                {
+                    MessageBox.Show("Lütfen bir sayısal Baud Değeri Giriniz","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+
                 try
                 {
                     serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
@@ -44,14 +50,10 @@ namespace RS232CommunicationExample
                     buttonOpen.Enabled = false;
                     buttonClose.Enabled = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    if (txtBaudRate.Text.GetType() == typeof(string))
-                    {
-                        MessageBox.Show("Lütfen Sayısal Baud Değer giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    else { }
+                    MessageBox.Show($"{ex.Message} Com Erişimi Reddetti, Hata!, {MessageBoxButtons.OK}, {MessageBoxIcon.Error}");
+                    return;
                 }
             }
         }
@@ -62,6 +64,7 @@ namespace RS232CommunicationExample
             {
                 serialPort.Close();
                 buttonOpen.Enabled = true;
+                buttonClose.Enabled = false;
             }
         }
 

@@ -2,7 +2,7 @@
 using System.IO.Ports;
 using System.Windows.Forms;
 
-namespace RS232CommunicationExample
+namespace RS232Communication
 {
     public partial class MainForm : Form
     {
@@ -39,23 +39,26 @@ namespace RS232CommunicationExample
             if (!serialPort.IsOpen)
             {
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();
-                if (txtBaudRate.Text == "DESİRED BAUD RATE :" || txtBaudRate.Text == "")
-                {
-                    MessageBox.Show("Lütfen bir sayısal Baud Değeri Giriniz","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    return;
-                }
-
                 try
                 {
-                    serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
-                    serialPort.Open();
-                    buttonOpen.Enabled = false;
-                    buttonClose.Enabled = true;
-                    buttonSend.Enabled = true;
+                    if (Convert.ToInt32(txtBaudRate.Text).GetType() == typeof(string) || txtBaudRate.Text == "")
+                    {
+                        MessageBox.Show("Lütfen bir sayısal Baud Değeri Giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
+                        serialPort.Open();
+                        buttonOpen.Enabled = false;
+                        buttonClose.Enabled = true;
+                        buttonSend.Enabled = true;
+                    }
                 }
+
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"{ex.Message} Com Erişimi Reddetti, Hata!, {MessageBoxButtons.OK}, {MessageBoxIcon.Error}");
+                    MessageBox.Show($"{ex.Message} Com Erişimi Reddetti!");
                     return;
                 }
             }
@@ -79,7 +82,6 @@ namespace RS232CommunicationExample
                 serialPort.WriteLine(textBoxSendData.Text);
             }
         }
-
 
         private void txtBaudRate_Click(object sender, EventArgs e)
         {

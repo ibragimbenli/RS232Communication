@@ -1,4 +1,4 @@
-﻿namespace RS232CommunicationExample
+﻿namespace RS232Communication
 {
     partial class MainForm
     {

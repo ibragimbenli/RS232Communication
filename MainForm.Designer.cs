@@ -106,7 +106,7 @@
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.Size = new System.Drawing.Size(339, 29);
             this.txtBaudRate.TabIndex = 6;
-            this.txtBaudRate.Text = "DESİRED BAUD RATE :";
+            this.txtBaudRate.Text = "2400";
             this.txtBaudRate.Click += new System.EventHandler(this.txtBaudRate_Click);
             // 
             // MainForm

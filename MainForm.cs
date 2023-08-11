@@ -18,11 +18,14 @@ namespace RS232CommunicationExample
             serialPortComboBox.Text = availablePorts[0];
             serialPort = new SerialPort();
             serialPort.DataReceived += SerialPort_DataReceived;
+            serialPort.Parity = Parity.Mark;
+            serialPort.StopBits = StopBits.One;
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
             buttonClose.Enabled = false;
             buttonOpen.Enabled = true;
+            buttonSend.Enabled = false;
         }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -36,7 +39,6 @@ namespace RS232CommunicationExample
             if (!serialPort.IsOpen)
             {
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();
-                buttonClose.Enabled = true;
                 if (txtBaudRate.Text == "DESİRED BAUD RATE :" || txtBaudRate.Text == "")
                 {
                     MessageBox.Show("Lütfen bir sayısal Baud Değeri Giriniz","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -49,6 +51,7 @@ namespace RS232CommunicationExample
                     serialPort.Open();
                     buttonOpen.Enabled = false;
                     buttonClose.Enabled = true;
+                    buttonSend.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -65,6 +68,7 @@ namespace RS232CommunicationExample
                 serialPort.Close();
                 buttonOpen.Enabled = true;
                 buttonClose.Enabled = false;
+                buttonSend.Enabled = false;
             }
         }
 

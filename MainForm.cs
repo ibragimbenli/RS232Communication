@@ -20,6 +20,7 @@ namespace RS232Communication
             serialPort.DataReceived += SerialPort_DataReceived;
             serialPort.Parity = Parity.Mark;
             serialPort.StopBits = StopBits.One;
+            //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -31,7 +32,14 @@ namespace RS232Communication
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string receivedData = serialPort.ReadExisting();
+           
             Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
+
+            bool hede = receivedData.Contains("abcd");
+            if (hede)
+            {
+                MessageBox.Show("Aranan Değer bulundu!");
+            }
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)

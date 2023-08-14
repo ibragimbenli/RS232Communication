@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RS232Communication", "RS232Communication.csproj", "{65C0C5FA-3506-4979-9041-04316C058C46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortApp", "..\SerialPortApp\SerialPortApp.csproj", "{9207EA1B-65B7-4D11-AB22-2645C94316DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{65C0C5FA-3506-4979-9041-04316C058C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C0C5FA-3506-4979-9041-04316C058C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C0C5FA-3506-4979-9041-04316C058C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9207EA1B-65B7-4D11-AB22-2645C94316DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9207EA1B-65B7-4D11-AB22-2645C94316DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9207EA1B-65B7-4D11-AB22-2645C94316DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9207EA1B-65B7-4D11-AB22-2645C94316DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

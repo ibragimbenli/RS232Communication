@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RS232Communication
@@ -7,7 +8,7 @@ namespace RS232Communication
     public partial class MainForm : Form
     {
         private SerialPort serialPort;
-
+        Thread thread;
         public MainForm()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace RS232Communication
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //thread.Start();
             buttonClose.Enabled = false;
             buttonOpen.Enabled = true;
             buttonSend.Enabled = false;
@@ -43,9 +45,13 @@ namespace RS232Communication
 
             //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
             string receivedData = serialPort.ReadExisting();
+            //thread.Join(100);
+            Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    DataWriter(richTextBoxReceivedData, receivedData);
+            //});
 
-            //Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
-            DataWriter(richTextBoxReceivedData, receivedData);
 
             bool hede = receivedData.Contains("abcd");
             if (hede)
@@ -73,7 +79,7 @@ namespace RS232Communication
                     }
                     else
                     {
-                        serialPort.BaudRate = int.Parse(comboDataBit.Text); // Set your desired baud rate
+                        serialPort.BaudRate = int.Parse(comboBaudRate.Text); // Set your desired baud rate
                         serialPort.Open();
                         buttonOpen.Enabled = false;
                         buttonClose.Enabled = true;
@@ -105,6 +111,7 @@ namespace RS232Communication
             if (serialPort.IsOpen)
             {
                 serialPort.WriteLine(textBoxSendData.Text);
+                DataWriter(richTextBoxReceivedData, "Outgoing Message: " + textBoxSendData.Text + "\n");
             }
         }
 
@@ -116,6 +123,11 @@ namespace RS232Communication
         private void textBoxSendData_Click(object sender, EventArgs e)
         {
             textBoxSendData.Text = string.Empty;
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            richTextBoxReceivedData.Text = string.Empty;
         }
     }
 }

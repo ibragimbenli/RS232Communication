@@ -242,12 +242,19 @@
             this.txtBaudRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtBaudRate.FormattingEnabled = true;
             this.txtBaudRate.Items.AddRange(new object[] {
-            "1100",
-            "2200",
+            "300",
+            "600",
+            "750",
+            "1200",
             "2400",
             "4800",
             "9600",
-            "15500"});
+            "19200",
+            "31250",
+            "38400",
+            "57600",
+            "74880",
+            "115200"});
             this.txtBaudRate.Location = new System.Drawing.Point(181, 251);
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.Size = new System.Drawing.Size(194, 32);

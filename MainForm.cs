@@ -19,9 +19,9 @@ namespace RS232Communication
             serialPortComboBox.Text = availablePorts[0];
             serialPort = new SerialPort();
             serialPort.DataReceived += SerialPort_DataReceived;
-            serialPort.Parity = Parity.Mark;
-            serialPort.StopBits = StopBits.One;
-            //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
+            serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), comboParity.Text);
+            serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboParity.Text); ;
+            serialPort.DataBits = Convert.ToInt32(comboDataBit.Text);
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -29,25 +29,20 @@ namespace RS232Communication
             buttonOpen.Enabled = true;
             buttonSend.Enabled = false;
         }
-
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string receivedData = serialPort.ReadExisting();
-           
-            Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
 
-            bool hede = receivedData.Contains("abcd");
-            if (hede)
-            {
-                MessageBox.Show("Aranan Değer bulundu!");
-            }
+            //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
+            string receivedData = serialPort.ReadExisting();
+
+            Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             if (serialPort == null)
             {
-                MessageBox.Show("Bağlanacak Cihaz Bulunamadı!","Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Bağlanacak Cihaz Bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (!serialPort.IsOpen)
@@ -55,14 +50,14 @@ namespace RS232Communication
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();
                 try
                 {
-                    if (Convert.ToInt32(txtBaudRate.Text).GetType() == typeof(string) || txtBaudRate.Text == "")
+                    if (Convert.ToInt32(comboDataBit.Text).GetType() == typeof(string) || comboDataBit.Text == "")
                     {
                         MessageBox.Show("Lütfen bir sayısal Baud Değeri Giriniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     else
                     {
-                        serialPort.BaudRate = int.Parse(txtBaudRate.Text); // Set your desired baud rate
+                        serialPort.BaudRate = int.Parse(comboDataBit.Text); // Set your desired baud rate
                         serialPort.Open();
                         buttonOpen.Enabled = false;
                         buttonClose.Enabled = true;
@@ -99,7 +94,7 @@ namespace RS232Communication
 
         private void txtBaudRate_Click(object sender, EventArgs e)
         {
-            txtBaudRate.Text = string.Empty;
+            comboDataBit.Text = string.Empty;
         }
 
         private void textBoxSendData_Click(object sender, EventArgs e)

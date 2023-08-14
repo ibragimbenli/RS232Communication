@@ -15,6 +15,7 @@ namespace RS232Communication
             // Populate the ComboBox with available serial ports
             string[] availablePorts = SerialPort.GetPortNames();
             serialPortComboBox.Items.AddRange(availablePorts);
+            if (availablePorts.Length <= 0) return;
             serialPortComboBox.Text = availablePorts[0];
             serialPort = new SerialPort();
             serialPort.DataReceived += SerialPort_DataReceived;
@@ -44,6 +45,11 @@ namespace RS232Communication
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
+            if (serialPort == null)
+            {
+                MessageBox.Show("Bağlanacak Cihaz Bulunamadı!","Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             if (!serialPort.IsOpen)
             {
                 serialPort.PortName = serialPortComboBox.SelectedItem.ToString();

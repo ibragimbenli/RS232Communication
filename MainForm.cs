@@ -8,7 +8,6 @@ namespace RS232Communication
     public partial class MainForm : Form
     {
         private SerialPort serialPort;
-        Thread thread;
         public MainForm()
         {
             InitializeComponent();
@@ -26,7 +25,6 @@ namespace RS232Communication
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //thread.Start();
             buttonClose.Enabled = false;
             buttonOpen.Enabled = true;
             buttonSend.Enabled = false;
@@ -40,24 +38,24 @@ namespace RS232Communication
             }
             control.Text += value;
         }
+        int say = 0;
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
             //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
-            string receivedData = serialPort.ReadExisting();
-            //thread.Join(100);
-            Invoke(new Action(() => richTextBoxReceivedData.AppendText(receivedData)));
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    DataWriter(richTextBoxReceivedData, receivedData);
-            //});
 
+            //string receivedData = serialPort.ReadExisting();
+            string receivedDatam = serialPort.ReadLine();
+            //Invoke(new Action(() => richTextBoxReceivedData.AppendText($"{say++} - " + receivedData)));
 
-            bool hede = receivedData.Contains("abcd");
-            if (hede)
+            this.Invoke((MethodInvoker)delegate
             {
+                DataWriter(richTextBoxReceivedData, receivedDatam);
+            });
+
+            bool hede = receivedDatam.Contains("abcd");
+            if (hede)
                 MessageBox.Show("Aranan Değer bulundu!");
-            }
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)

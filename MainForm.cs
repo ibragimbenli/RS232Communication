@@ -48,13 +48,20 @@ namespace RS232Communication
             string receivedDatam = serialPort.ReadLine();
             //Invoke(new Action(() => richTextBoxReceivedData.AppendText($"{say++} - " + receivedData)));
 
+            char[] karakterler = receivedDatam.ToCharArray();
+
+            for (int i = 0; i < karakterler.Length; i++)
+            {
+                listBox1.Text += karakterler;
+            }
             this.Invoke((MethodInvoker)delegate
             {
                 DataWriter(richTextBoxReceivedData, receivedDatam);
             });
 
-            bool hede = receivedDatam.Contains("abcd");
-            if (hede)
+            bool existing = receivedDatam.Contains("abcd");
+
+            if (existing)
                 MessageBox.Show("Aranan Değer bulundu!");
         }
 
@@ -129,3 +136,29 @@ namespace RS232Communication
         }
     }
 }
+
+/*
+ * 
+ ToCharArray => stringiniz charlarına ayırarak size char dizisi olarak teslim eder.
+            ornekMetin = txtGirisAlani.Text;
+            char[] karakterler = ornekMetin.ToCharArray();
+
+ Split => Metninizi özel bir karakterden birden fazla parçaya ayırmanıza olanak sağlayan metottur. Aynı anda birden fazla özel karakterde verebilirsiniz.
+            string mailAdresleri = txtGirisAlani.Text;
+            string[] adresler = mailAdresleri.Split(';', ',');
+            foreach (string item in adresler)
+            {
+                MessageBox.Show(item);
+            }
+
+ Substring => 1.Kullanım => Metninizden, parametrede gönderdiğiniz indexten başlayarak, geri kalan kısmını çekip almanıza olanak ağlar.
+        Substring => 2.Kullanım => Metninizden, ilk parametrede gönderdiğiniz indexten başlayarak, ikinci parametrede verdiğiniz eğer  kadarlık kısmını çekip almanıza olanak sağlar.
+        ornekMetin = txtGirisAlani.Text;
+        1.Kullanım
+        string ornekBir = ornekMetin.Substring(0,4);
+        MessageBox.Show(ornekBir);
+        2.Kullanım
+        string ornekIki = ornekMetin.Substring(3, 2);
+        MessageBox.Show(ornekIki);
+ 
+*/

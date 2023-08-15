@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
@@ -58,7 +59,7 @@ namespace RS232Communication
             });
             this.Invoke((MethodInvoker)delegate
             {
-                DataWriter(richTextBoxReceivedData, receivedDatam);
+                DataWriter(richTextBoxReceivedData, receivedDatam + Constants.vbCr);
             });
 
             bool existing = receivedDatam.Contains("abcd");
@@ -135,6 +136,7 @@ namespace RS232Communication
         private void btnClean_Click(object sender, EventArgs e)
         {
             richTextBoxReceivedData.Text = string.Empty;
+            listBox1.Items.Clear();
         }
     }
 }

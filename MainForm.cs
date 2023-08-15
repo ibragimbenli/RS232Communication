@@ -49,11 +49,13 @@ namespace RS232Communication
             //Invoke(new Action(() => richTextBoxReceivedData.AppendText($"{say++} - " + receivedData)));
 
             char[] karakterler = receivedDatam.ToCharArray();
-
-            for (int i = 0; i < karakterler.Length; i++)
+            this.Invoke((MethodInvoker)delegate
             {
-                listBox1.Text += karakterler;
-            }
+                for (int i = 0; i < karakterler.Length; i++)
+                {
+                    listBox1.Items.Add(karakterler[i]);
+                }
+            });
             this.Invoke((MethodInvoker)delegate
             {
                 DataWriter(richTextBoxReceivedData, receivedDatam);

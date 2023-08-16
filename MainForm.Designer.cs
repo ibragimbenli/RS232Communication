@@ -46,7 +46,6 @@
             this.comboDataBit = new System.Windows.Forms.ComboBox();
             this.comboStopBit = new System.Windows.Forms.ComboBox();
             this.comboParity = new System.Windows.Forms.ComboBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -67,14 +66,14 @@
             this.richTextBoxReceivedData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.richTextBoxReceivedData.Location = new System.Drawing.Point(28, 12);
             this.richTextBoxReceivedData.Name = "richTextBoxReceivedData";
-            this.richTextBoxReceivedData.Size = new System.Drawing.Size(339, 299);
+            this.richTextBoxReceivedData.Size = new System.Drawing.Size(339, 426);
             this.richTextBoxReceivedData.TabIndex = 1;
             this.richTextBoxReceivedData.Text = "";
             // 
             // textBoxSendData
             // 
             this.textBoxSendData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBoxSendData.Location = new System.Drawing.Point(28, 517);
+            this.textBoxSendData.Location = new System.Drawing.Point(28, 444);
             this.textBoxSendData.Name = "textBoxSendData";
             this.textBoxSendData.Size = new System.Drawing.Size(339, 29);
             this.textBoxSendData.TabIndex = 2;
@@ -84,7 +83,7 @@
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonClose.Location = new System.Drawing.Point(181, 413);
+            this.buttonClose.Location = new System.Drawing.Point(181, 540);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(194, 55);
             this.buttonClose.TabIndex = 4;
@@ -95,7 +94,7 @@
             // buttonOpen
             // 
             this.buttonOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonOpen.Location = new System.Drawing.Point(181, 298);
+            this.buttonOpen.Location = new System.Drawing.Point(181, 425);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(194, 55);
             this.buttonOpen.TabIndex = 5;
@@ -105,7 +104,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.listBox1);
             this.panel1.Controls.Add(this.richTextBoxReceivedData);
             this.panel1.Controls.Add(this.textBoxSendData);
             this.panel1.Controls.Add(this.btnClean);
@@ -113,13 +111,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(395, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(393, 719);
+            this.panel1.Size = new System.Drawing.Size(393, 622);
             this.panel1.TabIndex = 7;
             // 
             // btnClean
             // 
             this.btnClean.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnClean.Location = new System.Drawing.Point(28, 613);
+            this.btnClean.Location = new System.Drawing.Point(28, 540);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(339, 55);
             this.btnClean.TabIndex = 3;
@@ -130,7 +128,7 @@
             // buttonSend
             // 
             this.buttonSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonSend.Location = new System.Drawing.Point(28, 552);
+            this.buttonSend.Location = new System.Drawing.Point(28, 479);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(339, 55);
             this.buttonSend.TabIndex = 3;
@@ -155,7 +153,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(2, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(393, 719);
+            this.panel2.Size = new System.Drawing.Size(393, 622);
             this.panel2.TabIndex = 8;
             // 
             // label5
@@ -278,19 +276,11 @@
             this.comboParity.TabIndex = 0;
             this.comboParity.Text = "Mark";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(28, 326);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(339, 186);
-            this.listBox1.TabIndex = 4;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 719);
+            this.ClientSize = new System.Drawing.Size(788, 622);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "MainForm";
@@ -325,6 +315,5 @@
         private System.Windows.Forms.ComboBox comboDataBit;
         private System.Windows.Forms.ComboBox comboBaudRate;
         private System.Windows.Forms.Button btnClean;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }

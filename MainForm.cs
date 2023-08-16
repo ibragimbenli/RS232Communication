@@ -54,18 +54,21 @@ namespace RS232Communication
             {
                 for (int i = 0; i < karakterler.Length; i++)
                 {
-                    listBox1.Items.Add(karakterler[i]);
+                    richTextBoxReceivedData.Text += Convert.ToInt32(karakterler[i]).ToString() + " ";
                 }
             });
-            this.Invoke((MethodInvoker)delegate
-            {
-                DataWriter(richTextBoxReceivedData, receivedDatam + Constants.vbCr);
-            });
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    DataWriter(richTextBoxReceivedData, receivedDatam + Constants.vbCr);
+            //});
 
             bool existing = receivedDatam.Contains("abcd");
 
-            if (existing)
-                MessageBox.Show("Aranan Değer bulundu!");
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (existing)
+                    MessageBox.Show($"{serialPortComboBox.Text} Aranan Değer bulundu!");
+            });
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
@@ -119,7 +122,7 @@ namespace RS232Communication
             if (serialPort.IsOpen)
             {
                 serialPort.WriteLine(textBoxSendData.Text);
-                DataWriter(richTextBoxReceivedData, "Outgoing Message: " + textBoxSendData.Text + "\n");
+                DataWriter(richTextBoxReceivedData, "OutMessage: " + textBoxSendData.Text + "\n");
             }
         }
 

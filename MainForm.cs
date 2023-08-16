@@ -139,7 +139,6 @@ namespace RS232Communication
         private void btnClean_Click(object sender, EventArgs e)
         {
             richTextBoxReceivedData.Text = string.Empty;
-            listBox1.Items.Clear();
         }
     }
 }

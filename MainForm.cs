@@ -52,6 +52,7 @@ namespace RS232Communication
             char[] karakterler = receivedDatam.ToCharArray();
             this.Invoke((MethodInvoker)delegate
             {
+                richTextBoxReceivedData.Text += Constants.vbCr;
                 for (int i = 0; i < karakterler.Length; i++)
                 {
                     richTextBoxReceivedData.Text += Convert.ToInt32(karakterler[i]).ToString() + " ";

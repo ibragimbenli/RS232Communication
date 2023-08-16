@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.IO;
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RS232Communication
 {
@@ -49,11 +51,24 @@ namespace RS232Communication
             this.Invoke((MethodInvoker)delegate
             {
                 richTextBoxReceivedData.Text += Constants.vbCr;
-                for (int i = 0; i < karakterler.Length; i++)
+                foreach (char c in karakterler)
                 {
-                    richTextBoxReceivedData.Text += Convert.ToInt32(karakterler[i]).ToString() + " ";
+                    string hex = String.Format("{0:X}", Convert.ToInt32(c));
+                    richTextBoxReceivedData.Text += hex + " ";
+                }
+                //for (int i = 0; i < karakterler.Length; i++)
+                //{
+                //    string hex = String.Format("{0:X}", Convert.ToInt32(karakterler[i]));
+                //    richTextBoxReceivedData.Text += Convert.ToInt32(hex).ToString() + " ";
+                //}
+                using (StreamWriter sw = new StreamWriter("C:\\Users\\ibrahim.benli\\Desktop\\test.txt"))
+                {
+                    string data = richTextBoxReceivedData.Text;
+                    sw.Write(data);
+                    sw.Close();
                 }
             });
+
 
             bool existing = receivedDatam.Contains("abcd");
 

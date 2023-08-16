@@ -13,7 +13,6 @@ namespace RS232Communication
         {
             InitializeComponent();
 
-            // Populate the ComboBox with available serial ports
             string[] availablePorts = SerialPort.GetPortNames();
             serialPortComboBox.Items.AddRange(availablePorts);
             if (availablePorts.Length <= 0) return;
@@ -42,9 +41,6 @@ namespace RS232Communication
         int say = 0;
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-
-            //SeriPorttan Dizi gelecek ve gelen dizi değerleri içerisinde eğer belirlenen 4 değer varsa kalan 7 adetle birlikte 11 değeri de alacağız da alacağız.
-
             //string receivedData = serialPort.ReadExisting();
             string receivedDatam = serialPort.ReadLine();
             //Invoke(new Action(() => richTextBoxReceivedData.AppendText($"{say++} - " + receivedData)));
@@ -58,10 +54,6 @@ namespace RS232Communication
                     richTextBoxReceivedData.Text += Convert.ToInt32(karakterler[i]).ToString() + " ";
                 }
             });
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    DataWriter(richTextBoxReceivedData, receivedDatam + Constants.vbCr);
-            //});
 
             bool existing = receivedDatam.Contains("abcd");
 
@@ -91,7 +83,7 @@ namespace RS232Communication
                     }
                     else
                     {
-                        serialPort.BaudRate = int.Parse(comboBaudRate.Text); // Set your desired baud rate
+                        serialPort.BaudRate = int.Parse(comboBaudRate.Text); //Set your desired baud rate
                         serialPort.Open();
                         buttonOpen.Enabled = false;
                         buttonClose.Enabled = true;
@@ -126,12 +118,6 @@ namespace RS232Communication
                 DataWriter(richTextBoxReceivedData, "\nOutMessage: " + textBoxSendData.Text);
             }
         }
-
-        private void txtBaudRate_Click(object sender, EventArgs e)
-        {
-            comboDataBit.Text = string.Empty;
-        }
-
         private void textBoxSendData_Click(object sender, EventArgs e)
         {
             textBoxSendData.Text = string.Empty;

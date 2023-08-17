@@ -52,8 +52,8 @@ namespace RS232Communication
                 foreach (char c in karakterler)
                 {
                     hex += String.Format("{0:X} ", Convert.ToInt32(c));
-                    richTextBoxReceivedData.Text += hex + " ";
                 }
+                richTextBoxReceivedData.Text += hex + " " + Environment.NewLine;
                 var hexDataYaz = hex + " - " + date;
                 File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\test.txt", hexDataYaz + Environment.NewLine);
             });

@@ -6,10 +6,10 @@ using System.Windows.Forms;
 
 namespace RS232Communication
 {
-    public partial class MainForm : Form
+    public partial class RS_MainForm : Form
     {
         private SerialPort serialPort;
-        public MainForm()
+        public RS_MainForm()
         {
             InitializeComponent();
 

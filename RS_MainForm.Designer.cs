@@ -1,6 +1,6 @@
 ﻿namespace RS232Communication
 {
-    partial class MainForm
+    partial class RS_MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -276,16 +276,16 @@
             this.comboParity.TabIndex = 0;
             this.comboParity.Text = "Mark";
             // 
-            // MainForm
+            // RS_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 622);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "MainForm";
+            this.Name = "RS_MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "RS-232";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

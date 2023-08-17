@@ -38,7 +38,6 @@ namespace RS232Communication
             }
             control.Text += value;
         }
-        int say = 0;
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //string receivedData = serialPort.ReadExisting();
@@ -48,20 +47,15 @@ namespace RS232Communication
             char[] karakterler = receivedDatam.ToCharArray();
             this.Invoke((MethodInvoker)delegate
             {
-                richTextBoxReceivedData.Text += Constants.vbCr;
+                var date = DateTime.Now.ToLocalTime();
+                var hex = "";
                 foreach (char c in karakterler)
                 {
-                    string hex = String.Format("{0:X}", Convert.ToInt32(c));
+                    hex += String.Format("{0:X} ", Convert.ToInt32(c));
                     richTextBoxReceivedData.Text += hex + " ";
-
-                    using (StreamWriter sw = new StreamWriter(@"C:\Users\ibrahim.benli\Desktop\test.txt"))
-                    {
-                        var date = DateTime.Now.Date;
-                        var yaz = hex + " - " + date + Constants.vbCr;
-                        sw.WriteLine(yaz);
-                        sw.Close();
-                    }
                 }
+                var hexDataYaz = hex + " - " + date;
+                File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\test.txt", hexDataYaz + Environment.NewLine);
             });
 
 

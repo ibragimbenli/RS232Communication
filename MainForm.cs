@@ -2,9 +2,7 @@
 using System;
 using System.IO;
 using System.IO.Ports;
-using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RS232Communication
 {
@@ -55,17 +53,14 @@ namespace RS232Communication
                 {
                     string hex = String.Format("{0:X}", Convert.ToInt32(c));
                     richTextBoxReceivedData.Text += hex + " ";
-                }
-                //for (int i = 0; i < karakterler.Length; i++)
-                //{
-                //    string hex = String.Format("{0:X}", Convert.ToInt32(karakterler[i]));
-                //    richTextBoxReceivedData.Text += Convert.ToInt32(hex).ToString() + " ";
-                //}
-                using (StreamWriter sw = new StreamWriter("C:\\Users\\ibrahim.benli\\Desktop\\test.txt"))
-                {
-                    string data = richTextBoxReceivedData.Text;
-                    sw.Write(data);
-                    sw.Close();
+
+                    using (StreamWriter sw = new StreamWriter(@"C:\Users\ibrahim.benli\Desktop\test.txt"))
+                    {
+                        var date = DateTime.Now.Date;
+                        var yaz = hex + " - " + date + Constants.vbCr;
+                        sw.WriteLine(yaz);
+                        sw.Close();
+                    }
                 }
             });
 
@@ -130,7 +125,7 @@ namespace RS232Communication
             if (serialPort.IsOpen)
             {
                 serialPort.WriteLine(textBoxSendData.Text);
-                DataWriter(richTextBoxReceivedData, "\nOutMessage: " + textBoxSendData.Text);
+                //DataWriter(richTextBoxReceivedData, "\nOutMessage: " + textBoxSendData.Text);
             }
         }
         private void textBoxSendData_Click(object sender, EventArgs e)

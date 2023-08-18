@@ -47,7 +47,7 @@ namespace RS232Communication
             char[] karakterler = receivedDatam.ToCharArray();
             this.Invoke((MethodInvoker)delegate
             {
-                var date = DateTime.Now.ToLocalTime();
+                var date = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + ":" + DateTime.Now.Millisecond;
                 var hex = "";
                 foreach (char c in karakterler)
                 {

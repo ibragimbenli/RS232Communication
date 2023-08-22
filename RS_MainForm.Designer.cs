@@ -79,6 +79,7 @@
             this.textBoxSendData.TabIndex = 2;
             this.textBoxSendData.Text = "Sending Write Message:";
             this.textBoxSendData.Click += new System.EventHandler(this.textBoxSendData_Click);
+            this.textBoxSendData.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSendData_KeyPress);
             // 
             // buttonClose
             // 

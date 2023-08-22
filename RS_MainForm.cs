@@ -119,7 +119,6 @@ namespace RS232Communication
             if (serialPort.IsOpen)
             {
                 serialPort.WriteLine(textBoxSendData.Text);
-                //DataWriter(richTextBoxReceivedData, "\nOutMessage: " + textBoxSendData.Text);
             }
         }
         private void textBoxSendData_Click(object sender, EventArgs e)
@@ -130,6 +129,15 @@ namespace RS232Communication
         private void btnClean_Click(object sender, EventArgs e)
         {
             richTextBoxReceivedData.Text = string.Empty;
+        }
+
+        private void textBoxSendData_KeyPress(object sender, KeyPressEventArgs e)
+        {
+              // Backspace ve hexadecimal characters (0-9, A-F) izin verme durumu
+                if (!char.IsControl(e.KeyChar) && !Uri.IsHexDigit(e.KeyChar))
+                {
+                    e.Handled = true;// hexdecimal değilse tuşa basamasın
+                }
         }
     }
 }

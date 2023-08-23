@@ -70,7 +70,7 @@ namespace RS232Communication
                 {
                     var date = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + ":" + DateTime.Now.Millisecond;
                     var hexDataYaz = receivedDatam + " - " + date;
-                    File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\test.txt", hexDataYaz + Environment.NewLine);
+                    File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\RS323Test.txt", hexDataYaz + Environment.NewLine);
 
                     richTextBoxReceivedData.Text += receivedDatam + " " + Environment.NewLine;
                 }

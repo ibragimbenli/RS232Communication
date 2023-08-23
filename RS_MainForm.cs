@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -29,42 +28,52 @@ namespace RS232Communication
             buttonOpen.Enabled = true;
             buttonSend.Enabled = false;
         }
-        private void DataWriter(Control control, string value)//Hangi Konrtole hangi Metinsel veriyi yazdırmak istiyorsak buraya gönderdiğimizde yazan metod.
+
+        private void textBoxSendData_TextChanged(object sender, EventArgs e)
         {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<Control, string>(DataWriter), new object[] { control, value });
-                return;
-            }
-            control.Text += value;
+            textBoxSendData.TextChanged -= textBoxSendData_TextChanged;
+
+            string textWithoutSeparators = textBoxSendData.Text.Replace("-", "");
+
+            string newText = InsertSeparators(textWithoutSeparators, 2, "-");
+
+            textBoxSendData.Text = newText;
+
+            textBoxSendData.SelectionStart = textWithoutSeparators.Length + (textWithoutSeparators.Length / 2);
+
+            textBoxSendData.TextChanged += textBoxSendData_TextChanged;
         }
+
+        private string InsertSeparators(string input, int interval, string separator)
+        {
+            if (input.Length >= 22)
+                MessageBox.Show("En çok 11 karakter");
+            for (int i = interval; i < input.Length; i += interval + separator.Length)
+            {
+                input = input.Insert(i, separator);
+            }
+            return input;
+        }
+
+
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //string receivedData = serialPort.ReadExisting();
             string receivedDatam = serialPort.ReadLine();
-            //Invoke(new Action(() => richTextBoxReceivedData.AppendText($"{say++} - " + receivedData)));
 
-            char[] karakterler = receivedDatam.ToCharArray();
+            bool existing = receivedDatam.Replace("-", " ").Trim().Contains("06 07 81");
+            bool NoExisting = receivedDatam.Replace("-", " ").Trim().Contains("06 07 81 01");
+            var cont = receivedDatam[27].ToString()+ receivedDatam[28].ToString();
+
             this.Invoke((MethodInvoker)delegate
             {
-                var date = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + ":" + DateTime.Now.Millisecond;
-                var hex = "";
-                foreach (char c in karakterler)
+                if (existing == true && NoExisting == false && cont != "01")
                 {
-                    hex += String.Format("{0:X} ", Convert.ToInt32(c));
+                    var date = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + ":" + DateTime.Now.Millisecond;
+                    var hexDataYaz = receivedDatam + " - " + date;
+                    File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\test.txt", hexDataYaz + Environment.NewLine);
+
+                    richTextBoxReceivedData.Text += receivedDatam + " " + Environment.NewLine;
                 }
-                richTextBoxReceivedData.Text += hex + " " + Environment.NewLine;
-                var hexDataYaz = hex + " - " + date;
-                File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\test.txt", hexDataYaz + Environment.NewLine);
-            });
-
-
-            bool existing = receivedDatam.Contains("abcd");
-
-            this.Invoke((MethodInvoker)delegate
-            {
-                if (existing)
-                    MessageBox.Show($"{serialPortComboBox.Text} Aranan Değer bulundu!");
             });
         }
 
@@ -133,11 +142,11 @@ namespace RS232Communication
 
         private void textBoxSendData_KeyPress(object sender, KeyPressEventArgs e)
         {
-              // Backspace ve hexadecimal characters (0-9, A-F) izin verme durumu
-                if (!char.IsControl(e.KeyChar) && !Uri.IsHexDigit(e.KeyChar))
-                {
-                    e.Handled = true;// hexdecimal değilse tuşa basamasın
-                }
+            //Backspace ve hexadecimal characters (0-9, A-F) izin verme durumu
+            if (!char.IsControl(e.KeyChar) && !Uri.IsHexDigit(e.KeyChar))
+            {
+                e.Handled = true; //hexdecimal değilse tuşa basamasın
+            }
         }
     }
 }

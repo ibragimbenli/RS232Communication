@@ -46,6 +46,8 @@
             this.comboDataBit = new System.Windows.Forms.ComboBox();
             this.comboStopBit = new System.Windows.Forms.ComboBox();
             this.comboParity = new System.Windows.Forms.ComboBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,19 +74,21 @@
             // 
             // textBoxSendData
             // 
+            this.textBoxSendData.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxSendData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.textBoxSendData.Location = new System.Drawing.Point(8, 444);
             this.textBoxSendData.Name = "textBoxSendData";
             this.textBoxSendData.Size = new System.Drawing.Size(538, 29);
             this.textBoxSendData.TabIndex = 2;
-            this.textBoxSendData.Text = "Sending Write Message:";
+            this.textBoxSendData.Text = "SENDING WRITE MESSAGE:";
             this.textBoxSendData.Click += new System.EventHandler(this.textBoxSendData_Click);
+            this.textBoxSendData.TextChanged += new System.EventHandler(this.textBoxSendData_TextChanged);
             this.textBoxSendData.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSendData_KeyPress);
             // 
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonClose.Location = new System.Drawing.Point(16, 540);
+            this.buttonClose.Location = new System.Drawing.Point(20, 397);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(177, 55);
             this.buttonClose.TabIndex = 4;
@@ -95,9 +99,9 @@
             // buttonOpen
             // 
             this.buttonOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonOpen.Location = new System.Drawing.Point(11, 444);
+            this.buttonOpen.Location = new System.Drawing.Point(20, 336);
             this.buttonOpen.Name = "buttonOpen";
-            this.buttonOpen.Size = new System.Drawing.Size(182, 55);
+            this.buttonOpen.Size = new System.Drawing.Size(177, 55);
             this.buttonOpen.TabIndex = 5;
             this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = false;
@@ -112,7 +116,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(224, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(564, 622);
+            this.panel1.Size = new System.Drawing.Size(564, 693);
             this.panel1.TabIndex = 7;
             // 
             // btnClean
@@ -139,6 +143,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtSearch);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.buttonOpen);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.buttonClose);
@@ -154,7 +160,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(-5, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(229, 622);
+            this.panel2.Size = new System.Drawing.Size(229, 693);
             this.panel2.TabIndex = 8;
             // 
             // label5
@@ -277,11 +283,29 @@
             this.comboParity.TabIndex = 0;
             this.comboParity.Text = "Mark";
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(16, 642);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(181, 27);
+            this.txtSearch.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(40, 604);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(132, 24);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Search Word";
+            // 
             // RS_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 622);
+            this.ClientSize = new System.Drawing.Size(788, 693);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "RS_MainForm";
@@ -316,5 +340,7 @@
         private System.Windows.Forms.ComboBox comboDataBit;
         private System.Windows.Forms.ComboBox comboBaudRate;
         private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label6;
     }
 }

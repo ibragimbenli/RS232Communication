@@ -15,7 +15,7 @@ namespace RS232Communication
             string[] availablePorts = SerialPort.GetPortNames();
             serialPortComboBox.Items.AddRange(availablePorts);
             if (availablePorts.Length <= 0) return;
-            serialPortComboBox.Text = availablePorts[0];
+            serialPortComboBox.Text = availablePorts[availablePorts.Length - 1];
             serialPort = new SerialPort();
             serialPort.DataReceived += SerialPort_DataReceived;
             serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), comboParity.Text);
@@ -58,7 +58,10 @@ namespace RS232Communication
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string receivedDatam = serialPort.ReadLine();
+            //var receivedDatam = serialPort.ReadExisting();
+            var receivedDatam = serialPort.ReadLine();
+            //var receivedDatam2 = serialPort.ReadByte();
+            //var receivedDatam3 = serialPort.ReadChar();;
 
             bool existing = receivedDatam.Replace("-", " ").Trim().Contains("06 07 81");
             bool NoExisting = receivedDatam.Replace("-", " ").Trim().Contains("06 07 81 01");
